@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playwright TypeScript Tutorial</title>
+    <meta name="description" content="Learn Playwright with TypeScript through a complete tutorial website." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <div class="brand">Playwright TS</div>
+        <nav>
+          <a href="#introduction">Intro</a>
+          <a href="#setup">Setup</a>
+          <a href="#basics">Basics</a>
+          <a href="#advanced">Advanced</a>
+          <a href="#ci">CI</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="introduction">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Complete tutorial</p>
+            <h1>Learn Playwright with TypeScript</h1>
+            <p class="lead">
+              Master browser automation with a modern, reliable, and developer-friendly testing framework.
+            </p>
+            <div class="cta-row">
+              <a href="#setup" class="button primary">Start learning</a>
+              <a href="#basics" class="button secondary">View lessons</a>
+            </div>
+            <ul class="hero-points">
+              <li>Fast browser automation</li>
+              <li>Readable selectors</li>
+              <li>Built-in waiting and retries</li>
+            </ul>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <pre><code>npm init -y
+npm install -D @playwright/test typescript
+npx playwright test</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="setup">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Section 1</p>
+            <h2>Setup and installation</h2>
+          </div>
+
+          <div class="two-col">
+            <article class="panel">
+              <h3>Install dependencies</h3>
+              <pre><code>npm init -y
+npm install -D @playwright/test typescript</code></pre>
+            </article>
+
+            <article class="panel">
+              <h3>Example config</h3>
+              <pre><code>import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  use: {
+    headless: true,
+    trace: 'on-first-retry',
+  },
+});</code></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="basics">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Section 2</p>
+            <h2>Core Playwright concepts</h2>
+          </div>
+
+          <div class="three-grid">
+            <article class="card">
+              <h3>Locators</h3>
+              <pre><code>page.getByRole('button', { name: 'Submit' })
+page.getByLabel('Email')
+page.locator('input[name="email"]')</code></pre>
+            </article>
+
+            <article class="card">
+              <h3>Assertions</h3>
+              <pre><code>await expect(page).toHaveTitle(/Example/);
+await expect(page.getByRole('heading')).toContainText('Welcome');
+await expect(page.locator('input')).toHaveValue('test');</code></pre>
+            </article>
+
+            <article class="card">
+              <h3>Interactions</h3>
+              <pre><code>await page.goto('https://example.com');
+await page.fill('#email', 'hello@test.com');
+await page.click('text=Submit');</code></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="advanced">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Section 3</p>
+            <h2>Advanced testing patterns</h2>
+          </div>
+
+          <div class="two-col">
+            <article class="panel">
+              <h3>Page objects</h3>
+              <pre><code>export class LoginPage {
+  constructor(private page: Page) {}
+
+  async login(username: string, password: string) {
+    await this.page.fill('#username', username);
+    await this.page.fill('#password', password);
+    await this.page.click('button:has-text("Login")');
+  }
+}</code></pre>
+            </article>
+
+            <article class="panel">
+              <h3>API testing</h3>
+              <pre><code>const response = await request.get('https://example.com/api');
+expect(response.status()).toBe(200);
+const body = await response.json();
+expect(body).toHaveProperty('status');</code></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="ci">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Section 4</p>
+            <h2>CI and deployment</h2>
+          </div>
+
+          <div class="panel full-panel">
+            <pre><code>name: Playwright Tests
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npx playwright test</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>Playwright TypeScript Tutorial</p>
+        <a href="https://playwright.dev" target="_blank" rel="noreferrer">Official Playwright Docs</a>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
